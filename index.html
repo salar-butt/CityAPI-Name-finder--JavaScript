@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Api</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+
+        #main {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            background-image: url("https://images.unsplash.com/photo-1592777336981-18334a076cef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNpdHklMjBpbWFnZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60");
+        }
+
+        input {
+            position: absolute;
+            height: 5vh;
+            left: 40%;
+            top: 20%;
+            width: 20vw;
+            border-top-right-radius: 10px;
+            border: none;
+            border-bottom-left-radius: 10px;
+            padding-left: 70px;
+            box-sizing: border-box;
+            outline: none;
+            animation: box 1s linear infinite alternate-reverse;
+        }
+
+        @keyframes box {
+            to {
+                box-shadow: -3px -3px 5px 5px #cebb53;
+            }
+
+            from {
+                box-shadow: 3px 3px 5px 5px #ad844e;
+            }
+        }
+
+        #card {
+            position: absolute;
+            height: 65vh;
+            width: 45%;
+            left: 27%;
+            top: 30%;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(15, 15, 15, 0.37);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            overflow-y: auto; /* Add scrollbar when content overflows */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <input type="text" placeholder="Enter the City Name:" id="cityInput">
+        <div id="card"></div>
+    </div>
+
+    <script>
+        let input = document.getElementById('cityInput');
+        let card = document.getElementById('card');
+
+        input.addEventListener('keyup', () => {
+            let searchText = input.value.trim().toLowerCase();
+            fetchCities(searchText);
+        });
+
+        const url = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+        function fetchCities(searchText) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => displayCities(data, searchText))
+                .catch(error => console.error('Error fetching cities:', error));
+        }
+
+        function displayCities(data, searchText) {
+            card.innerHTML = ""; // Clear previous search results
+
+            data.forEach(city => {
+                if (city.city.toLowerCase().includes(searchText)) {
+                    card.innerHTML += `
+                        <div>
+                            <h1>${city.city}</h1>
+                            <h3>Population: ${city.population}</h3>
+                            <h3>Rank: ${city.rank}</h3> 
+                            <h3>State: ${city.state}</h3> 
+                        </div>
+                    `;
+                }
+            });
+
+            if (card.innerHTML === "") {
+                card.innerHTML = `<h1 style="color: red;">Not found</h1>`;
+            }
+        }
+    </script>
+</body>
+</html>

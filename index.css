@@ -1,0 +1,70 @@
+*{
+    padding:0;
+    margin:0;
+}
+.main {
+    height: 99.7vh;
+    width: 100vw;
+    background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bGlnaHQlMjBjaXRpZXMlMjB3YWxscGFwZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60');
+    background-size: 100% 100%;
+}
+
+input {
+    height: 40px;
+    width: 40%;
+    font-size: 30px;
+    text-align: center;
+    margin: 100px 30%;
+    outline: none;
+    font-weight: bolder;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid silver;
+    animation: shadow 4s ease infinite alternate;
+    background: #00000088;
+}
+
+@keyframes shadow {
+    0% {
+        box-shadow: 5px 5px 50px 10px orangered;
+        box-shadow:-5px -5px 50px 10px rgb(197, 143, 124)
+    }
+
+    50% {
+        box-shadow: 5px 5px 50px 10px rgb(81, 145, 81);
+        box-shadow: -5px -5px 50px 10px rgb(158, 159, 196)
+    }
+
+    100% {
+        box-shadow: 5px 5px 50px 10px rgb(226, 174, 126);
+        box-shadow: -5px -5px 50px 10px royalblue;
+    }
+
+}
+
+input::placeholder {
+    color: wheat;
+}
+
+.display {
+    width: 60%;
+    height: 300px;
+    margin: 0px auto;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    overflow: auto;
+    display:none;
+}
+
+.city-div {
+    border-radius: 10px;
+    border: 1px solid wheat;
+    box-shadow: 5px 5px 10px black;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
